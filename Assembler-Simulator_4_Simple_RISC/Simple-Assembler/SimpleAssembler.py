@@ -139,8 +139,14 @@ for linecount in range(len(inputlines)):
   if line[0]=="hlt":
     hltcount+=1
   
-  if (linecount==len(inputlines)-1 and line[0]!="hlt") or hltcount>1:
+  if (linecount==len(inputlines)-1 and line[0]!="hlt"):
+    
     print('ERROR: hlt Not Last Line Error @ Line',linecount+1,sep=" ")
+    errors.append(linecount+1)
+    break
+
+  if hltcount>1:
+    print('ERROR: Multiple hlt Error @ Line',linecount+1,sep=" ")
     errors.append(linecount+1)
     break
 
