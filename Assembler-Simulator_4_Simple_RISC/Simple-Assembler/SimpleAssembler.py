@@ -1,4 +1,5 @@
 import sys
+
 regaddr={ "R0": "000",
         "R1": "001",
         "R2":"010",
@@ -99,6 +100,15 @@ label={}
 
 for linecount in range(len(inputlines)):
   line=inputlines[linecount].split()
+  t=type(line[0])
+  idk=line[0] 
+  if t=='label':
+    label[idk[:-1]]=0
+
+
+
+for linecount in range(len(inputlines)):
+  line=inputlines[linecount].split()
   if not line:
     continue
   t=type(line[0]) 
@@ -107,7 +117,6 @@ for linecount in range(len(inputlines)):
     errors.append(linecount+1)
     break
   if(t=='label'):
-    label[line[0]]=0
     line.pop(0)
   if len(line)==0:
     print("ERROR: Syntax Error @ Line",linecount+1,sep=" ")
@@ -197,9 +206,9 @@ def opcode(a, movReg=69):
     if (movReg==69):
         return D[a]
     elif (movReg==1):
-        return D["mov"][0]
-    else:
         return D["mov"][1]
+    else:
+        return D["mov"][0]
 
 
 def binary(n):
@@ -263,7 +272,6 @@ def drivercode(line,t):
 
 
 variables={}
-label={}
 linecount=0
 consecBlank=0
 
@@ -304,3 +312,4 @@ for linecount in range(len(inputlines)):
 
 # if flag==1:
 #   print("SYNTAX ERROR")
+
